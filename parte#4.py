@@ -1,18 +1,22 @@
+import pandas as pd
 import requests
+from io import StringIO
 
-def descargar_csv_desde_url(url, nombre_archivo):
-    try:
-        respuesta = requests.get(url)
-        
-        if respuesta.status_code == 200:
-            with open(nombre_archivo, 'wb') as archivo:
-                archivo.write(respuesta.content)
-            print(f"Los datos se han descargado y guardado en {nombre_archivo} correctamente.")
-        else:
-            print(f"La solicitud GET no fue exitosa. Código de estado: {respuesta.status_code}")
-    except Exception as e:
-        print(f"Ocurrió un error: {str(e)}")
-
+# URL de los datos
 url = "https://huggingface.co/datasets/mstz/heart_failure/raw/main/heart_failure_clinical_records_dataset.csv"
-nombre_archivo = "datos_descargados.csv"
-descargar_csv_desde_url(url, nombre_archivo)
+
+# Realizar una solicitud GET para descargar los datos
+response = requests.get(url)
+
+if response.status_code == 200:
+    # Leer los datos en un DataFrame
+    data = pd.read_csv(StringIO(response.text))
+    
+    # Realizar operaciones adicionales en el DataFrame si es necesario
+    # Por ejemplo, puedes hacer un preprocesamiento de los datos aquí
+    
+    # Guardar el DataFrame en un archivo CSV si es necesario
+    data.to_csv("datos_parte6.csv", index=False)
+    print("Datos descargados y guardados como datos_procesados.csv")
+else:
+    print("No se pudo descargar los datos. Código de estado:", response.status_code)
