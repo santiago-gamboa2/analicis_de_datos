@@ -1,5 +1,5 @@
 ''' 
-colocar esta url en bahs python proyecto#6.py https://huggingface.co/datasets/mstz/heart_failure/raw/main/heart_failure_clinical_records_dataset.csv
+colocar esta url en bahs python parte#6.py https://huggingface.co/datasets/mstz/heart_failure/raw/main/heart_failure_clinical_records_dataset.csv
  si no no va a dar 
  '''
 import argparse
