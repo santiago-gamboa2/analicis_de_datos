@@ -1,6 +1,8 @@
 """
+SIN CORRER EL CODIGO SOLO ABREN LA TERMINAL Y PEGAN LA URL SI NO FUNCIONA RECTIFICAR QUE 
+COPIARLA BIEN 
 esta es la url que tienen que poner en bash
- & "C:/Program Files/Python311/python.exe" c:/Users/USUARIO/Desktop/analicis_datos/parte#7.py https://huggingface.co/datasets/mstz/heart_failure/raw/main/heart_failure_clinical_records_dataset.csv 
+& "C:/Program Files/Python311/python.exe" c:/Users/USUARIO/Desktop/analicis_datos/parte#7.py https://huggingface.co/datasets/mstz/heart_failure/raw/main/heart_failure_clinical_records_dataset.csv
 """
 # me hicieron odiar los graficos con este trabajo gracias 
 import argparse
