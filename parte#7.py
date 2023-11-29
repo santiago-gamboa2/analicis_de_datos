@@ -2,15 +2,26 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 try:
-    
     archivo_csv = "datos_procesados.csv"
     dataframe = pd.read_csv(archivo_csv)
 
-    
+    # Eliminar valores faltantes
+    dataframe.dropna(inplace=True)
+
+    # Eliminar filas duplicadas
+    dataframe.drop_duplicates(inplace=True)
+
+    # Filtrar los valores atípicos usando el método del rango intercuartil (IQR)
+    Q1 = dataframe['age'].quantile(0.25)
+    Q3 = dataframe['age'].quantile(0.75)
+    IQR = Q3 - Q1
+    lower_bound = Q1 - 1.5 * IQR
+    upper_bound = Q3 + 1.5 * IQR
+    dataframe = dataframe[(dataframe['age'] >= lower_bound) & (dataframe['age'] <= upper_bound)]
+
     men_data = dataframe[dataframe['sex'] == 1]
     women_data = dataframe[dataframe['sex'] == 0]
 
-    
     plt.figure(figsize=(12, 6))
     plt.subplot(1, 2, 1)
     plt.hist(men_data['age'], bins=20, color='blue', alpha=0.5, label='Hombres', edgecolor='black')
@@ -20,7 +31,6 @@ try:
     plt.ylabel('Frecuencia')
     plt.legend()
 
-    
     categories = ['anaemia', 'diabetes', 'smoking', 'DEATH_EVENT']
     men_counts = [men_data[category].sum() for category in categories]
     women_counts = [women_data[category].sum() for category in categories]
@@ -35,7 +45,7 @@ try:
     plt.ylabel('Cantidad')
     plt.title('Distribución de Categorías por Sexo')
     plt.legend()
-    
+
     plt.tight_layout()
     plt.show()
 
